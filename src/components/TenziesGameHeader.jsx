@@ -2,7 +2,7 @@ import React from "react";
 
 const TenziesGameHeader = () => {
   return (
-    <div className="flex flex-col justify-center items-center border border-black p-10 sm:h-48 lg:h-30">
+    <div className="flex flex-col justify-center items-center border border-black bg-slate-100 p-10 sm:h-48 lg:h-30">
       <h1 className="text-2xl font-mono font-extrabold p-3 sm:mt-3 sm:p-2">
         Tenzies Game
       </h1>
