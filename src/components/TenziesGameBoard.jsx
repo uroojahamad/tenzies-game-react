@@ -1,21 +1,40 @@
-import React from "react";
+import React, {useState, useEffect} from "react";
 import Dice from "./Dice";
 
 const TenziesGameBoard = () => {
+
+  const [diceSet, setDiceSet] = useState([]);
+
+
+  const generateRandomNumber = () => {
+    return Math.ceil(Math.random() * 6);
+  }
+
+  useEffect(() => {
+    const newDiceArray = [];
+    for (let index = 0; index < 10; index++) {
+      const randomNumber = generateRandomNumber();
+      newDiceArray.push(randomNumber);
+      
+    }
+    setDiceSet(newDiceArray);
+  
+  }, []);
+ 
+
+
   return (
     <>
       <div className="border-b border-slate-300 bg-slate-100 p-10 h-96 sm:h-60 flex justify-center items-center">
         <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-5 gap-5 lg:gap-10 p-3 shadow-2xl rounded-xl pt-4 bg-slate-100">
-          <Dice />
-          <Dice />
-          <Dice />
-          <Dice />
-          <Dice />
-          <Dice />
-          <Dice />
-          <Dice />
-          <Dice />
-          <Dice />
+          {
+            diceSet.map((diceNumber, index) => {
+              return <Dice 
+                key={index}
+                value={diceNumber}
+              />
+            })
+          }
         </div>
       </div>
 
