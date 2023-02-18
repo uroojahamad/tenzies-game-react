@@ -1,13 +1,21 @@
-import React, {useState, useEffect} from "react";
+import React, {useState} from "react";
 import Dice from "./Dice";
+import {nanoid} from 'nanoid'
 
 const TenziesGameBoard = () => {
   
+  const generateNewDice = () =>{
+      return {
+        value: Math.ceil(Math.random() * 6),
+        isHeld: false,
+        id: nanoid()
+      }
+  }
+
   const allNewDice = () => {
     const newDiceArray = [];
     for (let index = 0; index < 10; index++) {
-      const randomNumber = Math.ceil(Math.random() * 6);
-      newDiceArray.push(randomNumber); 
+      newDiceArray.push(generateNewDice()); 
     }
     return newDiceArray;
   }
@@ -15,7 +23,16 @@ const TenziesGameBoard = () => {
   const [diceSet, setDiceSet] = useState(allNewDice());
 
   const rollDice = () => {
-    setDiceSet(allNewDice());
+    setDiceSet(prevDiceSet => prevDiceSet.map(dice =>{
+      return dice.isHeld ? dice : generateNewDice() 
+    }));
+  }
+
+  const holdDice = (id) =>{
+    console.log(id)
+    setDiceSet(prevDiceSet => prevDiceSet.map((dice, index) => {
+      return dice.id === id ? {...dice, isHeld: !dice.isHeld} : dice 
+    }))
   }
 
   return (
@@ -26,7 +43,9 @@ const TenziesGameBoard = () => {
             diceSet.map((diceNumber, index) => {
               return <Dice 
                 key={index}
-                value={diceNumber}
+                value={diceNumber.value}
+                isHeld={diceNumber.isHeld}
+                holdDice={() => holdDice(diceNumber.id)}
               />
             })
           }
