@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import Dice from "./Dice";
 import { nanoid } from "nanoid";
 import Confetti from "react-confetti";
+import sound from "../mixkit-cheering-crowd-loud-whistle-610.wav";
 
 const TenziesGameBoard = () => {
   const [result, setResult] = useState(false);
@@ -54,9 +55,14 @@ const TenziesGameBoard = () => {
     }
   }, [diceSet]);
 
+  const winPlayAudio = () => {
+    new Audio(sound).play();
+  };
+
   return (
     <>
       {result && <Confetti />}
+      {result && winPlayAudio()}
       <div className="w-full border-b border-slate-300 bg-slate-100 p-10 h-96 sm:h-60 flex justify-center items-center">
         <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-5 gap-5 lg:gap-10 p-3 shadow-2xl rounded-xl pt-4 bg-slate-100">
           {diceSet.map((diceNumber, index) => {
