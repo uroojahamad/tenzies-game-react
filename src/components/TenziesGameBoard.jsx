@@ -6,6 +6,7 @@ import sound from "../mixkit-cheering-crowd-loud-whistle-610.wav";
 
 const TenziesGameBoard = () => {
   const [result, setResult] = useState(false);
+  const [attempts, setAttempts] = useState(0);
 
   const generateNewDice = () => {
     return {
@@ -31,6 +32,7 @@ const TenziesGameBoard = () => {
         return dice.isHeld ? dice : generateNewDice();
       })
     );
+    setAttempts(prevAttempts => prevAttempts + 1);
   };
 
   const holdDice = (id) => {
@@ -79,9 +81,9 @@ const TenziesGameBoard = () => {
         {result && (
           <div className="flex flex-col border border-black w-3/4 h-72 absolute justify-center items-center space-y-10 bg-white rounded-2xl p-6">
             <p className="text-xl font-mono font-bold">
-              You took 10 attempts to finish the game!!!!
+              You took {attempts} attempts to finish the game!!!!
             </p>
-            <button className="w-44 sm:w-56 h-14 border border-blue-500 bg-blue-500 cursor-pointer text-white rounded-3xl shadow-md shadow-blue-200 hover:shadow-lg hover:shadow-blue-600 text-2xl sm:text-3xl font-mono active:translate-y-1 duration-150 active:shadow-inner active:shadow-blue-900">
+            <button className="w-44 sm:w-56 h-14 border border-blue-500 bg-blue-500 cursor-pointer text-white rounded-3xl shadow-md shadow-blue-200 hover:shadow-lg hover:shadow-blue-600 text-2xl sm:text-3xl font-mono active:translate-y-1 duration-150 active:shadow-inner active:shadow-blue-900" onClick={resetGame}>
               Play Again
             </button>
           </div>
@@ -91,9 +93,9 @@ const TenziesGameBoard = () => {
       <div className="w-full flex justify-center items-center bg-slate-100 p-10 h-32 sm:h-20">
         <button
           className="w-60 h-14 sm:w-40 sm:h-10 lg:w-60 lg:h-14 border border-blue-500 bg-blue-500 cursor-pointer text-white rounded-3xl shadow-md shadow-blue-200 hover:shadow-lg hover:shadow-blue-600 text-3xl font-mono active:translate-y-1 duration-150 active:shadow-inner active:shadow-blue-900"
-          onClick={result ? resetGame : rollDice}
+          onClick={rollDice}
         >
-          {result ? "Reset Game" : "Roll"}
+          Roll
         </button>
       </div>
     </>
