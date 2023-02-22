@@ -63,7 +63,7 @@ const TenziesGameBoard = () => {
     <>
       {result && <Confetti />}
       {result && winPlayAudio()}
-      <div className="w-full border-b border-slate-300 bg-slate-100 p-10 h-96 sm:h-60 flex justify-center items-center">
+      <div className="w-full border-b border-slate-300 bg-slate-100 p-10 h-96 sm:h-60 flex flex-col justify-center items-center relative">
         <div className="grid grid-cols-4 sm:grid-cols-4 md:grid-cols-5 gap-5 lg:gap-10 p-3 shadow-2xl rounded-xl pt-4 bg-slate-100">
           {diceSet.map((diceNumber, index) => {
             return (
@@ -76,6 +76,16 @@ const TenziesGameBoard = () => {
             );
           })}
         </div>
+        {result && (
+          <div className="flex flex-col border border-black w-3/4 h-72 absolute justify-center items-center space-y-10 bg-white rounded-2xl p-6">
+            <p className="text-xl font-mono font-bold">
+              You took 10 attempts to finish the game!!!!
+            </p>
+            <button className="w-44 sm:w-56 h-14 border border-blue-500 bg-blue-500 cursor-pointer text-white rounded-3xl shadow-md shadow-blue-200 hover:shadow-lg hover:shadow-blue-600 text-2xl sm:text-3xl font-mono active:translate-y-1 duration-150 active:shadow-inner active:shadow-blue-900">
+              Play Again
+            </button>
+          </div>
+        )}
       </div>
 
       <div className="w-full flex justify-center items-center bg-slate-100 p-10 h-32 sm:h-20">
