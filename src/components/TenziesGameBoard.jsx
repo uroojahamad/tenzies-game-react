@@ -37,7 +37,7 @@ const TenziesGameBoard = () => {
 
   const holdDice = (id) => {
     setDiceSet((prevDiceSet) =>
-      prevDiceSet.map((dice, index) => {
+      prevDiceSet.map((dice) => {
         return dice.id === id ? { ...dice, isHeld: !dice.isHeld } : dice;
       })
     );
